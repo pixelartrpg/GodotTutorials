@@ -5,6 +5,8 @@ var interactiveObject = null
 var ioType = ""
 export var chestKeys = 0
 
+var openSound = preload("res://Resources/Sounds/open.wav")
+var lockedSound = preload("res://Resources/Sounds/shake.wav")
 
 onready var detector = $InteractDetector/Detector
 
@@ -55,15 +57,18 @@ func _input(event):
 			#Added ioType so we could have different interactions, like doors and such. The frameid could be different based on type you are opening
 			if ioType == "Chest":
 				if chestKeys >= 1:
+					$SoundEffect.stream = openSound
 					interactiveObject.get_node("Sprite").frame = 5
 					chestKeys -= 1
 				else:	#you dont have enough keys	
-					#using rotation to fake an animation		
+					#using rotation to fake an animation
+					$SoundEffect.stream = lockedSound	
 					interactiveObject.get_node("Sprite").rotation_degrees = -5
-					yield(get_tree().create_timer(0.05), "timeout")
+					yield(get_tree().create_timer(0.08), "timeout")
 					interactiveObject.get_node("Sprite").rotation_degrees = 5
-					yield(get_tree().create_timer(0.05), "timeout")
+					yield(get_tree().create_timer(0.08), "timeout")
 					interactiveObject.get_node("Sprite").rotation_degrees = 0
+				$SoundEffect.play()	
 			if ioType == "Door":
 				#this doesnt exist, put here as an example of a door
 				interactiveObject.get_node("Sprite").frame = 1
