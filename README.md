@@ -3,6 +3,7 @@
 These are a few sample projects in Godot to help the community.
 
 OpenChest
+
 This simple project has a world, player, chest, and key scene.
 The player has an area2d that stays in front of the players facing direction.
 When the area2d collides with an object, it sets a local variable to the instance of the colliding body.
