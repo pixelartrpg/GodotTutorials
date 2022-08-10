@@ -16,4 +16,7 @@ If the players chestKeys is 0 or less, then we fake an animation using the rotat
 This is accomplished by setting rotation_degrees = -5, waiting 0.05 seconds then setting it to 5 then 0.05 seconds setting it back to 0.
 This gives us a very basic feedback to notify the player they dont have a key to open the chest.
 
+Ive attached an AudioStreamPlayer2D to the player scene that will play an opening or locked sound when you try to open a chest. Using a preloader to pull in the sound files.
+
+
 I have also added a label at the top of the world scene that updates with the players chestKeys value.
