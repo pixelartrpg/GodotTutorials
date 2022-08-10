@@ -5,7 +5,7 @@ var interactiveObject = null
 var ioType = ""
 export var chestKeys = 0
 
-var openSound = preload("res://Resources/Sounds/open.wav")
+var openSound = preload("res://Resources/Sounds/discovery.wav")
 var lockedSound = preload("res://Resources/Sounds/shake.wav")
 
 onready var detector = $InteractDetector/Detector
@@ -56,23 +56,28 @@ func _input(event):
 		if interactiveObject != null:
 			#Added ioType so we could have different interactions, like doors and such. The frameid could be different based on type you are opening
 			if ioType == "Chest":
+				#we setup a tempChest to hold the chest object, incase the player quickly moves while trying to open
+				var tempChest = interactiveObject
 				if chestKeys >= 1:
 					if !interactiveObject.isOpened:
 						$SoundEffect.stream = openSound
 						interactiveObject.get_node("Sprite").frame = 5
 						interactiveObject.isOpened = true
+						interactiveObject.get_node("Coins").emitting = true
 						chestKeys -= 1
+						$SoundEffect.play()	
 				else:	#you dont have enough keys	
 					if !interactiveObject.isOpened:
 						#using rotation to fake an animation
 						$SoundEffect.stream = lockedSound	
-						interactiveObject.get_node("Sprite").rotation_degrees = -5
+						tempChest.get_node("Sprite").rotation_degrees = -5
 						yield(get_tree().create_timer(0.08), "timeout")
-						interactiveObject.get_node("Sprite").rotation_degrees = 5
+						tempChest.get_node("Sprite").rotation_degrees = 5
 						yield(get_tree().create_timer(0.08), "timeout")
-						interactiveObject.get_node("Sprite").rotation_degrees = 0
+						tempChest.get_node("Sprite").rotation_degrees = 0
+						$SoundEffect.play()	
 					
-				$SoundEffect.play()	
+				
 			if ioType == "Door":
 				#this doesnt exist, put here as an example of a door
 				interactiveObject.get_node("Sprite").frame = 1
