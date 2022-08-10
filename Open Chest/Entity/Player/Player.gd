@@ -45,7 +45,7 @@ func _physics_process(delta):
 	
 	#If we are pressing a movement key, then move. Else stop.
 	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * 200, 200 * delta)
+		velocity = velocity.move_toward(input_vector * 200, 100 * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, 5000 * delta)
 	velocity = move_and_slide(velocity)
