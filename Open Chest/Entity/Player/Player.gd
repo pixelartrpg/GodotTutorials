@@ -3,7 +3,7 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 var interactiveObject = null
 var ioType = ""
-var chestKeys = 1
+export var chestKeys = 0
 
 
 onready var detector = $InteractDetector/Detector
@@ -64,7 +64,6 @@ func _input(event):
 					interactiveObject.get_node("Sprite").rotation_degrees = 5
 					yield(get_tree().create_timer(0.05), "timeout")
 					interactiveObject.get_node("Sprite").rotation_degrees = 0
-					
 			if ioType == "Door":
 				#this doesnt exist, put here as an example of a door
 				interactiveObject.get_node("Sprite").frame = 1
@@ -74,6 +73,9 @@ func _on_InteractDetector_body_entered(body):
 	if body.is_in_group("Chest"):
 		interactiveObject = body
 		ioType = "Chest"
+	if body.is_in_group("Key"):
+		chestKeys += 1
+		body.queue_free()
 
 
 func _on_InteractDetector_body_exited(body):
