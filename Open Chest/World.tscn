@@ -16,6 +16,7 @@ position = Vector2( 76, 77 )
 
 [node name="Chest2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 180, 106 )
+contains = "Armor"
 
 [node name="Key" parent="." instance=ExtResource( 4 )]
 position = Vector2( 55, 145 )

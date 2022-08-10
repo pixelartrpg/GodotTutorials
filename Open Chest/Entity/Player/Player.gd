@@ -62,8 +62,8 @@ func _input(event):
 					if !interactiveObject.isOpened:
 						$SoundEffect.stream = openSound
 						interactiveObject.get_node("Sprite").frame = 5
-						interactiveObject.isOpened = true
-						interactiveObject.get_node("Coins").emitting = true
+						interactiveObject.isOpened = true				
+						interactiveObject.get_node("Contents").emitting = true
 						chestKeys -= 1
 						$SoundEffect.play()	
 				else:	#you dont have enough keys	
