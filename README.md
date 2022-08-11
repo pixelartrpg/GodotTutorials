@@ -18,5 +18,6 @@ This gives us a very basic feedback to notify the player they dont have a key to
 
 Ive attached an AudioStreamPlayer2D to the player scene that will play an opening or locked sound when you try to open a chest. Using a preloader to pull in the sound files.
 
+Chests have an exported variable for what they contain. Currently only setup for Coins and Armor. When you open a chest that is Coins, it plays a small Particle2D effect of tiny coins coming out of the box. If the chest is set to Armor it plays a single piece of armor coming out of the chest. These are just to basic examples of using a particle effect. 
 
 I have also added a label at the top of the world scene that updates with the players chestKeys value.
