@@ -1,18 +1,9 @@
 extends Node2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-
 func _process(delta):
+	#All we are doing here is looking at the Player nodes exported variable
+	#chestKeys to be able to get a count of how many keys the player has.
+	#the str() function converts the integer to a String
 	$Label.text = "Keys: " + str($Player.chestKeys)
 
 
