@@ -17,6 +17,6 @@ uv_clip=true
 image_flags=0
 collision_layer=1
 embed_internal_images=true
-save_tiled_properties=true
+save_tiled_properties=false
 add_background=true
 post_import_script="res://Scripts/TiledPostProcess.gd"
