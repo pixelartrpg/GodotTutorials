@@ -13,7 +13,7 @@ extents = Vector2( 106, 92 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 468, 169 )
+position = Vector2( 305, 199 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 hframes = 4
@@ -146,6 +146,14 @@ margin_top = 4.0
 margin_right = 459.0
 margin_bottom = 24.0
 text = "View Sheet"
+
+[node name="FileName" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.211765 )
+margin_left = 15.0
+margin_top = 28.0
+margin_right = 591.0
+margin_bottom = 42.0
+text = "File Path"
 
 [connection signal="input_event" from="Sprite/Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

@@ -48,7 +48,7 @@ func _on_FileDialog_file_selected(path):
 	texture.create_from_image(image, 0)
 	$Sprite.texture = texture
 	$Preview.texture = texture
-	
+	$FileName.text = $FileDialog.current_file
 			
 func _physics_process(delta):
 	if selected:
@@ -106,19 +106,21 @@ func _on_Button2_pressed():
 
 func _on_PreviewArea_input_event(viewport, event, shape_idx):
 	if Input.is_action_just_pressed("rightclick"):
-		$Preview.scale.x += 1
-		$Preview.scale.y += 1
+		$Preview.scale.x += 0.5
+		$Preview.scale.y += 0.5
 		#print($Sprite.scale.x);
 		if($Preview.scale.x >= 4):
-			$Preview.scale.x = 1
-			$Preview.scale.y = 1
+			$Preview.scale.x = .5
+			$Preview.scale.y = .5
 
 
 func _on_Button3_pressed():
 	if $Button3.text == "View Sheet":
 		$Button3.text = "Hide Sheet"
+		$Sprite.visible = false
 		$Preview.visible = true
 	else:
 		$Button3.text = "View Sheet"
 		$Preview.visible = false
+		$Sprite.visible = true
 	
