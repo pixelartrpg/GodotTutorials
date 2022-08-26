@@ -1,0 +1,138 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Spritesheet Animator.gd" type="Script" id=2]
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/bashful bat v01.png-18172f7e96fc34baedac64f7f717372c.stex"
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 61.327
+
+[node name="Spritesheet Animator" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 306, 181 )
+scale = Vector2( 1.5, 1.5 )
+texture = SubResource( 2 )
+hframes = 4
+vframes = 4
+frame = 4
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+position = Vector2( -204, -120.667 )
+scale = Vector2( 0.666667, 0.666667 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+position = Vector2( 308, 185 )
+shape = SubResource( 1 )
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="IncreaseAnimationSpeed" type="Button" parent="."]
+margin_left = 286.0
+margin_top = 4.0
+margin_right = 396.0
+margin_bottom = 24.0
+text = "Increase Delay"
+
+[node name="DecreaseAnimationSpeed" type="Button" parent="."]
+margin_left = 167.0
+margin_top = 4.0
+margin_right = 279.0
+margin_bottom = 24.0
+text = "Decrease Delay"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 150.0
+margin_bottom = 22.0
+text = "Animation Delay: 0.40"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 315.0
+margin_bottom = 130.0
+window_title = "Open Spritesheet"
+resizable = true
+dialog_text = "Select A SpriteSheet"
+mode = 0
+access = 2
+
+[node name="Button" type="Button" parent="."]
+margin_left = 466.0
+margin_top = 4.0
+margin_right = 594.0
+margin_bottom = 24.0
+text = "Select Spritesheet"
+
+[node name="txtColumns" type="TextEdit" parent="."]
+margin_left = 77.0
+margin_top = 372.0
+margin_right = 113.0
+margin_bottom = 394.0
+text = "4"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 13.0
+margin_top = 378.0
+margin_right = 69.0
+margin_bottom = 392.0
+text = "Columns"
+
+[node name="txtRows" type="TextEdit" parent="."]
+margin_left = 157.0
+margin_top = 373.0
+margin_right = 193.0
+margin_bottom = 395.0
+text = "4"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 118.0
+margin_top = 377.0
+margin_right = 153.0
+margin_bottom = 391.0
+text = "Rows"
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 199.0
+margin_top = 377.0
+margin_right = 341.0
+margin_bottom = 391.0
+text = "Frames Per Animation"
+
+[node name="txtImagesPerAnimation" type="TextEdit" parent="."]
+margin_left = 347.0
+margin_top = 374.0
+margin_right = 385.0
+margin_bottom = 393.0
+text = "4"
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 458.0
+margin_top = 374.0
+margin_right = 570.0
+margin_bottom = 394.0
+text = "Next Animation"
+
+[node name="lblAnimation" type="Label" parent="."]
+margin_left = 578.0
+margin_top = 377.0
+margin_right = 596.0
+margin_bottom = 391.0
+text = "1"
+
+[connection signal="input_event" from="Sprite/Area2D" to="." method="_on_Area2D_input_event"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
+[connection signal="pressed" from="IncreaseAnimationSpeed" to="." method="_on_IncreaseAnimationSpeed_pressed"]
+[connection signal="pressed" from="DecreaseAnimationSpeed" to="." method="_on_DecreaseAnimationSpeed_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="text_changed" from="txtColumns" to="." method="_on_txtColumns_text_changed"]
+[connection signal="text_changed" from="txtRows" to="." method="_on_txtRows_text_changed"]
+[connection signal="text_changed" from="txtImagesPerAnimation" to="." method="_on_txtImagesPerAnimation_text_changed"]
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
