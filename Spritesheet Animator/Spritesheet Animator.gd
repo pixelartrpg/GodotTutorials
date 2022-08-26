@@ -7,10 +7,13 @@ var frameStart = 1
 var frameCounterMax = 4
 var totalAnimationFrameCount = 16
 
-
 func _on_ready():
 	$Sprite.frame = frameStart
 	totalAnimationFrameCount = int($txtColumns.text) * int($txtRows.text)
+	$txtColumns.text = str($Sprite.vframes)
+	$txtRows.text = str($Sprite.hframes)
+	
+	
 
 func _on_AnimationTimer_timeout():
 	if $txtImagesPerAnimation.text.is_valid_integer():
@@ -21,17 +24,17 @@ func _on_AnimationTimer_timeout():
 		#print("Reset Sprite Frame To " + str(frameStart -1))
 		
 	$Sprite.frame = frameCounter
-	print("Sprite Frame: " + str($Sprite.frame))
+	#print("Sprite Frame: " + str($Sprite.frame))
 	frameCounter += 1
 
 func _on_DecreaseAnimationSpeed_pressed():
 	$AnimationTimer.wait_time -= 0.05
-	$Label.text = "Animation Speed: " + str($AnimationTimer.wait_time)
+	$Label.text = "Delay: " + str($AnimationTimer.wait_time)
 
 
 func _on_IncreaseAnimationSpeed_pressed():
 	$AnimationTimer.wait_time += 0.05
-	$Label.text = "Animation Speed: " + str($AnimationTimer.wait_time)
+	$Label.text = "Delay: " + str($AnimationTimer.wait_time)
 
 
 func _on_Button_pressed():
@@ -44,6 +47,7 @@ func _on_FileDialog_file_selected(path):
 	var texture = ImageTexture.new()
 	texture.create_from_image(image, 0)
 	$Sprite.texture = texture
+	$Preview.texture = texture
 	
 			
 func _physics_process(delta):
@@ -65,12 +69,12 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	if Input.is_action_just_pressed("click"):
 		selected = true
 	if Input.is_action_just_pressed("rightclick"):
-		$Sprite.scale.x += 1
-		$Sprite.scale.y += 1
+		$Sprite.scale.x += 0.25
+		$Sprite.scale.y += 0.25
 		#print($Sprite.scale.x);
-		if($Sprite.scale.x >= 8):
-			$Sprite.scale.x = 1
-			$Sprite.scale.y = 1
+		if($Sprite.scale.x >= 5):
+			$Sprite.scale.x = 0.25
+			$Sprite.scale.y = 0.25
 
 
 func _on_txtColumns_text_changed():
@@ -98,3 +102,23 @@ func _on_Button2_pressed():
 	$Sprite.frame = frameStart
 	$lblAnimation.text = str(frameStart)
 	$AnimationTimer.start()
+
+
+func _on_PreviewArea_input_event(viewport, event, shape_idx):
+	if Input.is_action_just_pressed("rightclick"):
+		$Preview.scale.x += 1
+		$Preview.scale.y += 1
+		#print($Sprite.scale.x);
+		if($Preview.scale.x >= 4):
+			$Preview.scale.x = 1
+			$Preview.scale.y = 1
+
+
+func _on_Button3_pressed():
+	if $Button3.text == "View Sheet":
+		$Button3.text = "Hide Sheet"
+		$Preview.visible = true
+	else:
+		$Button3.text = "View Sheet"
+		$Preview.visible = false
+	
